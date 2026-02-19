@@ -50,6 +50,7 @@ function App() {
         <h1>
           NIFTY <span className="highlight">MV SETUP</span>
         </h1>
+        
 
         <input
           type="number"
