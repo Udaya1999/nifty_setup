@@ -13,13 +13,9 @@ function App() {
 
     let buffer = 0;
 
-    if (value < 50) {
-      buffer = 0.20;
-    } else if (value >= 51 && value <= 100) {
-      buffer = 0.15;
-    } else if (value >= 101) {
-      buffer = 0.10;
-    }
+    if (value < 50) buffer = 0.2;
+    else if (value >= 51 && value <= 100) buffer = 0.15;
+    else buffer = 0.1;
 
     const calculatedMV = value + value * buffer;
     setMv(calculatedMV.toFixed(2));
@@ -41,7 +37,6 @@ function App() {
     });
   };
 
-  // ✅ CLEAR FUNCTION
   const clearAll = () => {
     setPremium("");
     setMv(null);
@@ -53,12 +48,9 @@ function App() {
     <div className="app">
       <div className="card">
         <h1>
-          NIFTY -
-          <span style={{ color: "whitesmoke" }}> MV </span>
-          <span style={{ color: "red" }}>SETUP</span>
+          NIFTY <span className="highlight">MV SETUP</span>
         </h1>
 
-        {/* Step 1 */}
         <input
           type="number"
           placeholder="Enter Premium Value"
@@ -72,7 +64,6 @@ function App() {
           <>
             <div className="mv-display">MV : ₹ {mv}</div>
 
-            {/* Step 2 */}
             <input
               type="number"
               placeholder="Enter Entry Price"
@@ -94,9 +85,8 @@ function App() {
               <div>45% Target : ₹ {targets.t45}</div>
             </div>
 
-            {/* ✅ CLEAR BUTTON (only after target calculation) */}
-            <button onClick={clearAll} className="clear-btn">
-              Clear 
+            <button className="clear-btn" onClick={clearAll}>
+              New Calculation
             </button>
           </>
         )}
@@ -106,3 +96,4 @@ function App() {
 }
 
 export default App;
+
