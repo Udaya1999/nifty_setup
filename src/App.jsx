@@ -50,12 +50,12 @@ function App() {
 
         <input
           type="number"
-          placeholder="Enter Premium Value"
+          placeholder="Enter 9:25 / 12:25 High "
           value={premium}
           onChange={(e) => setPremium(e.target.value)}
         />
 
-        <button onClick={calculateMV}>Calculate MV</button>
+        <button onClick={calculateMV} style={{fontFamily:"ui-rounded"}}>Go</button>
 
         {mv && (
           <>
