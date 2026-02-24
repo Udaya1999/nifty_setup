@@ -59,7 +59,7 @@ function App() {
 
         {mv && (
           <>
-            <div className="mv-display">MV : ₹ {mv}</div>
+            <div className="mv-display">ENTRY :{mv} ₹</div>
 
             <div className="targets">
               <div>15% Target : ₹ {targets?.t15}</div>
