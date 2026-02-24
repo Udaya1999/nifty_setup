@@ -4,7 +4,6 @@ import "./App.css";
 function App() {
   const [premium, setPremium] = useState("");
   const [mv, setMv] = useState(null);
-  const [entry, setEntry] = useState("");
   const [targets, setTargets] = useState(null);
 
   const calculateMV = () => {
@@ -18,29 +17,27 @@ function App() {
     else buffer = 0.1;
 
     const calculatedMV = value + value * buffer;
-    setMv(calculatedMV.toFixed(2));
-    setTargets(null);
-  };
+    const mvValue = parseFloat(calculatedMV.toFixed(2));
 
-  const calculateTargets = () => {
-    const price = parseFloat(entry);
-    if (!price) return;
+    setMv(mvValue);
 
-    const t15 = price + price * 0.15;
-    const t30 = price + price * 0.3;
-    const t45 = price + price * 0.45;
+    // 🎯 Calculate targets directly from MV
+    const t15 = mvValue + mvValue * 0.15;
+    const t30 = mvValue + mvValue * 0.30;
+    const t50 = mvValue + mvValue * 0.50;
+    const t100 = mvValue + mvValue * 1.0;
 
     setTargets({
       t15: t15.toFixed(2),
       t30: t30.toFixed(2),
-      t45: t45.toFixed(2),
+      t50: t50.toFixed(2),
+      t100: t100.toFixed(2),
     });
   };
 
   const clearAll = () => {
     setPremium("");
     setMv(null);
-    setEntry("");
     setTargets(null);
   };
 
@@ -50,7 +47,6 @@ function App() {
         <h1>
           NIFTY <span className="highlight">MV SETUP</span>
         </h1>
-        
 
         <input
           type="number"
@@ -65,25 +61,11 @@ function App() {
           <>
             <div className="mv-display">MV : ₹ {mv}</div>
 
-            <input
-              type="number"
-              placeholder="Enter Entry Price"
-              value={entry}
-              onChange={(e) => setEntry(e.target.value)}
-            />
-
-            <button onClick={calculateTargets}>
-              Calculate Targets
-            </button>
-          </>
-        )}
-
-        {targets && (
-          <>
             <div className="targets">
-              <div>15% Target : ₹ {targets.t15}</div>
-              <div>30% Target : ₹ {targets.t30}</div>
-              <div>45% Target : ₹ {targets.t45}</div>
+              <div>15% Target : ₹ {targets?.t15}</div>
+              <div>30% Target : ₹ {targets?.t30}</div>
+              <div>50% Target : ₹ {targets?.t50}</div>
+              <div>100% Target : ₹ {targets?.t100}</div>
             </div>
 
             <button className="clear-btn" onClick={clearAll}>
